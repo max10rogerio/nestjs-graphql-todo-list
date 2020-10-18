@@ -5,9 +5,9 @@ Features:
 - [x] Create
 - [x] List
 - [x] Toggle
-- [] Find by id
-- [] Remove
-- [] Tests
+- [ ] Find by id
+- [ ] Remove
+- [ ] Tests
 
 **Example**
 
