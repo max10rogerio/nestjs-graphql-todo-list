@@ -18,6 +18,10 @@ export class TodoService {
 
     this.initTodoList(user);
 
+    if (TodoService.userTodos[user].length >= 3) {
+      throw new Error('Todo limit is 3.')
+    } 
+
     TodoService.userTodos[user].push(newTodo);
 
     return newTodo;

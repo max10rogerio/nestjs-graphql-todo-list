@@ -1,13 +1,16 @@
 # **Nestjs Graphql - Todo List example**
 
+![CI](https://github.com/max10rogerio/nestjs-graphql-todo-list/workflows/CI/badge.svg)
+
 Features:
 
 - [x] Create
 - [x] List
 - [x] Toggle
-- [] Find by id
-- [] Remove
-- [] Tests
+- [ ] Find by id
+- [ ] Remove
+- [ ] Limit of 100 todos per user
+- [ ] Tests
 
 **Example**
 
