@@ -7,6 +7,7 @@ Features:
 - [x] Toggle
 - [ ] Find by id
 - [ ] Remove
+- [ ] Limit of 100 todos per user
 - [ ] Tests
 
 **Example**
