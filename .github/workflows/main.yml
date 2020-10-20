@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-18
+    steps:
+      # Get code
+      - uses: actions/checkout@v2
+        
+      # Setup node version with 12.x
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      
+      # Setup for caching node_modules
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      # Environment contains yarn and npm by default
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      # Run jest tests
+      - name: Run Tests
+        run: yarn test --verbose --runInBand --bail
