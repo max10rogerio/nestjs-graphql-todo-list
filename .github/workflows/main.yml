@@ -67,7 +67,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: '/dist'
-          key: build-${{ GITHUB_RUN_NUMBER }}
+          key: build-${{ github.run_number }}
 
       - name: Show size project
         run: du -hs ./dist
@@ -80,7 +80,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: '/dist'
-          key: build-${{ GITHUB_RUN_NUMBER }}
+          key: build-${{ github.run_number }}
 
       - name: Show size project
         run: |
