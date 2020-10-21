@@ -41,6 +41,19 @@ jobs:
     needs: [test]
 
     steps:
+      - uses: actions/checkout@v2
+
+      # Setup node version with 12.x
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      
+      # Setup for caching node_modules
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Build project
         run: yarn build
 
