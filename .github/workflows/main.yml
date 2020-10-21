@@ -54,6 +54,7 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Build project
         run: yarn build
 
@@ -62,6 +63,11 @@ jobs:
       
       - name: Move node_modules to dist folder
         run: mv ./node_modules ./dist
+
+      - uses: actions/cache@v2
+        with:
+          path: '/dist'
+          key: build-${{ GITHUB_RUN_NUMBER }}
 
       - name: Show size project
         run: du -hs ./dist
@@ -74,7 +80,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: '/dist'
-          key: ${{ runner.GITHUB_RUN_NUMBER }}-build }}
+          key: build-${{ GITHUB_RUN_NUMBER }}
 
       - name: Show size project
         run: |
