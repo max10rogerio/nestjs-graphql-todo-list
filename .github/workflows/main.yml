@@ -63,5 +63,23 @@ jobs:
       - name: Move node_modules to dist folder
         run: mv ./node_modules ./dist
         
+      - name: Build project
+        run: yarn build
+        
       - name: Show size project
         run: du -hs ./dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - uses: actions/cache@v2
+        with:
+          path: '/dist'
+          key: ${{ runner.GITHUB_RUN_NUMBER }}-build }}
+
+      - name: Show size project
+        run: |
+          du -hs dist
+          ls -la
