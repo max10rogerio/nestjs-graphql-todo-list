@@ -1,8 +1,8 @@
 import { UseGuards } from "@nestjs/common";
 import { Args, Mutation, Resolver, Query, Context } from "@nestjs/graphql";
 import { Request } from "express";
-import { UserGuard } from "src/graphql/guards/user.guard";
 
+import { UserGuard } from "../../../graphql/guards/user.guard";
 import { Todo } from "../models/todo.model";
 import { TodoService } from "../service/todo.service";
 
