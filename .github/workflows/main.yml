@@ -101,8 +101,9 @@ jobs:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.DIGITAL_OCEAN_SSH }}
-          source: "dist/**/*.*"
+          source: "dist"
           target: ${{ secrets.DIGITAL_OCEAN_APP_PATH }}
+          strip_components: 1
 
       - name: Stop PM2 Application
         uses: appleboy/ssh-action@master
