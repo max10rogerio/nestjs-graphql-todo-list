@@ -1,0 +1,59 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run_unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Get code
+      - uses: actions/checkout@v2
+
+      # Setup node version with 12.x
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      # Setup for caching node_modules
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      # Environment contains yarn and npm by default
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # Run jest tests
+      - name: Run Unit Tests
+        run: yarn test --verbose --runInBand --bail
+
+  run_e2e_tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Get code
+      - uses: actions/checkout@v2
+
+      # Setup node version with 12.x
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      # Setup for caching node_modules
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      # Environment contains yarn and npm by default
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run E2E Tests
+        run: yarn test:e2e --verbose --runInBand --bail
