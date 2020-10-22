@@ -10,7 +10,6 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    needs: [run_unit_tests, run_e2e_tests]
 
     steps:
       - uses: actions/checkout@v2
