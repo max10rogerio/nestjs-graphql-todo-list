@@ -36,20 +36,18 @@ jobs:
       - name: Run E2E Tests
         run: yarn test:e2e --verbose --runInBand --bail
         
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
     needs: [test]
 
     steps:
       - uses: actions/checkout@v2
 
-      # Setup node version with 12.x
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      
-      # Setup for caching node_modules
+
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
@@ -67,7 +65,27 @@ jobs:
       - name: Show size project
         run: du -hs ./dist
         
-      - uses: actions/upload-artifact@v2
+      - name: Stop PM2 Application
+        uses: appleboy/ssh-action@master
         with:
-          name: build-production-${{ github.run_number }}
-          path: dist/
+          host: ${{ secrets.DIGITAL_OCEAN_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USER }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          script: pm2 stop ${{ secrets.DIGITAL_OCEAN_PM2_APPNAME }}
+      
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USER }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          source: "dist/*"
+          target: ${{ secrets.DIGITAL_OCEAN_APP_PATH }}
+
+      - name: Stop PM2 Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USER }}
+          key: ${{ secrets.DIGITAL_OCEAN_SSH }}
+          script: pm2 start ${{ secrets.DIGITAL_OCEAN_PM2_APPNAME }}
