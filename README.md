@@ -1,5 +1,7 @@
 # **Nestjs Graphql - Todo List example**
 
+![CI](https://github.com/max10rogerio/nestjs-graphql-todo-list/workflows/CI/badge.svg)
+
 Features:
 
 - [x] Create
