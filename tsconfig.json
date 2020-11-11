@@ -9,7 +9,13 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
-  }
+    "baseUrl": "src",
+    "incremental": true,
+    "paths": {
+      "@app/*": ["app/*"],
+      "@graphql/*": ["graphql/*"],
+      "@modules/*": ["modules/*"]
+    }
+  },
+  "include": [ "src/**/*" ]
 }
