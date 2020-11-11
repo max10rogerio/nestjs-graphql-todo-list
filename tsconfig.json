@@ -17,7 +17,13 @@
       "@modules/*": ["modules/*"]
     }
   },
-  "include": [ "src/**/*", "test/**/*" ],
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    ".eslintrc.js",
+    ".eslintignore.js",
+    "jest-e2e.config.js"
+  ],
   "exclude": [
     "**/build/**",
     "**/coverage/**",

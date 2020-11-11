@@ -1,2 +1,2 @@
 jest.config.js
-.eslintrc.js
+jest-e2e.config.js
