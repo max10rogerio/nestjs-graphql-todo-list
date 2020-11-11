@@ -17,5 +17,11 @@
       "@modules/*": ["modules/*"]
     }
   },
-  "include": [ "src/**/*" ]
+  "include": [ "src/**/*", "test/**/*" ],
+  "exclude": [
+    "**/build/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
 }
